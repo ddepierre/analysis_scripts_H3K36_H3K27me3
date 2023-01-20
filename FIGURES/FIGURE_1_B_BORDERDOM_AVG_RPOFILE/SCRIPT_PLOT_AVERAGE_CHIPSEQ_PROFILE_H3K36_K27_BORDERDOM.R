@@ -36,8 +36,8 @@ library("dplyr")
 library("devtools")
 
 ## define workdir
-workdir = ""
 
+workdir = ""
 ######################################################################################################################################################
 ### LOAD FUNCTION
 ######################################################################################################################################################
@@ -112,14 +112,8 @@ names(gene_dm6_gr) = paste0(names(gene_dm6_gr),".1")
 gene_dm6_gr <- gene_dm6_gr[seqnames(gene_dm6_gr) %in% c("2L", "2R", "3L", "3R", "4",  "X",  "Y")]
 tss_gene_dm6_gr <- resize(gene_dm6_gr,1,"start")
 
-H3K27me3_CTRL_DOMAINSBORDER_centered_oriented = rtracklayer::import.bed(paste0(workdir, "DATA_PROCESSING/NORMR_DETECTION/DOMAINS_H3K27me3/H3K27me3_CTRL_DOMAINSsup1500_BORDER_centered_oriented.bed"))
-seqlevelsStyle(H3K27me3_CTRL_DOMAINSBORDER_centered_oriented) <- "Ensembl"
-seqinfo(H3K27me3_CTRL_DOMAINSBORDER_centered_oriented) = seqinfo(tss_gene_dm6_gr)
-H3K27me3_CTRL_DOMAINSBORDER_centered_oriented <- H3K27me3_CTRL_DOMAINSBORDER_centered_oriented[seqnames(H3K27me3_CTRL_DOMAINSBORDER_centered_oriented) %in% c("2L", "2R", "3L", "3R", "4",  "X",  "Y")]
-H3K27me3_CTRL_DOMAINSBORDER_centered1_oriented <- resize(H3K27me3_CTRL_DOMAINSBORDER_centered_oriented,1,"center")
-names(H3K27me3_CTRL_DOMAINSBORDER_centered1_oriented) = paste0(names(H3K27me3_CTRL_DOMAINSBORDER_centered1_oriented), ".1")
-
-GR_list_toPlot = c("H3K27me3_CTRL_DOMAINSBORDER_centered1_oriented")
+H3K27me3_CTRL_DOMAINS_borders = rtracklayer::import.bed(paste0(workdir, "DATA_PROCESSING/NORMR_DETECTION/DOMAINS_H3K27me3/H3K27me3_CTRL_DOMAINS_borders_gapsup1500bp_sup1500bp_filledInputGaps.bed"))
+GR_list_toPlot = c("H3K27me3_CTRL_DOMAINS_borders")
 
 for(GR in GR_list_toPlot){
   pdf(paste0(workdir,"FIGURES/FIGURE_1_B_BORDERDOM_AVG_RPOFILE/AVERAGE_PROFILE_K27C_H3K36me2_H3K36me3_" ,GR,".pdf"))
